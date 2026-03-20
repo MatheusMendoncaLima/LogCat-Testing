@@ -1,5 +1,6 @@
 package com.example.logcatbutton
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,12 +18,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Label
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,8 +44,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             LogCatButtonTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Surface(Modifier.padding(innerPadding)){
-                    MainScreen({ Log.d("Debug", "msg de debug")}, {Log.i("Info", "msg de info")}, {Log.w("Warning", "msg de warning")}, {Log.w("Error", "msg de erro")})
+                    Surface(Modifier.padding(innerPadding)) {
+                        var text by remember { mutableStateOf("") }
+                        MainScreen(
+                            { Log.d("Debug", "Aluno "+text+" tirou MB") },
+                            { Log.i("Info", "Aluno "+text+" tirou B") },
+                            { Log.w("Warning", "Aluno "+text+" tirou R") },
+                            { Log.w("Error", "Aluno "+text+" tirou I") },
+                            text,
+                            { li -> text=li })
 
 
                     }
@@ -59,28 +74,53 @@ fun GreetingPreview() {
 
 @Composable
 fun MainScreen(
-    onClickButtonDebug : () -> Unit = {},
-    onClickButtonInfo : () -> Unit = {},
-    onClickButtonWarning : () -> Unit = {},
-    onClickButtonError : () -> Unit = {},
+    onClickButtonDebug: () -> Unit = {},
+    onClickButtonInfo: () -> Unit = {},
+    onClickButtonWarning: () -> Unit = {},
+    onClickButtonError: () -> Unit = {},
+    textFieldText: String = "",
+    textFieldOnValueChange: (String) -> Unit = {}
 ) {
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-
         Column(modifier = Modifier.fillMaxWidth(0.95f), Arrangement.SpaceEvenly) {
-        Row {
-            Button(modifier = Modifier.fillMaxWidth(), onClick = onClickButtonDebug,  colors = ButtonDefaults.buttonColors(containerColor =  colorScheme.primary)) { Text("Debug") }
+            Row {
+                OutlinedTextField(
+                    value = textFieldText,
+                    onValueChange = textFieldOnValueChange,
+                    label = { Text("Insira Aluno") },
+                    modifier = Modifier.fillMaxWidth())
+            }
+            Spacer(Modifier.padding(bottom = 50.dp))
+            Row {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onClickButtonDebug,
+                    colors = ButtonDefaults.buttonColors(containerColor = colorScheme.primary)
+                ) { Text("Debug") }
+            }
+            Row {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onClickButtonInfo,
+                    colors = ButtonDefaults.buttonColors(containerColor = colorScheme.secondary)
+                ) { Text("Info") }
+            }
+            Row {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onClickButtonWarning,
+                    colors = ButtonDefaults.buttonColors(containerColor = colorScheme.tertiary)
+                ) { Text("Warning") }
+            }
+            Row {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onClickButtonError,
+                    colors = ButtonDefaults.buttonColors(containerColor = colorScheme.error)
+                ) { Text("Error") }
+            }
         }
-        Row {
-            Button(modifier = Modifier.fillMaxWidth(), onClick = onClickButtonInfo,  colors = ButtonDefaults.buttonColors(containerColor = colorScheme.secondary)) { Text("Info") }
-        }
-        Row {
-            Button(modifier = Modifier.fillMaxWidth(), onClick = onClickButtonWarning,  colors = ButtonDefaults.buttonColors(containerColor = colorScheme.tertiary)) { Text("Warning") }
-        }
-        Row {
-            Button(modifier = Modifier.fillMaxWidth(), onClick = onClickButtonError,  colors = ButtonDefaults.buttonColors(containerColor = colorScheme.error)) { Text("Error") }
-        }
-    }
     }
 
 }
