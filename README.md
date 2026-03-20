@@ -1,2 +1,5 @@
 # LogCat-Testing
-<img width="219" height="321" alt="image" src="https://github.com/user-attachments/assets/217dc7fd-8187-4519-9ad4-b790e458ff97" />
+
+<img width="275" height="223" alt="image" src="https://github.com/user-attachments/assets/459a8dfb-1bb9-4402-8320-14ca31d91bfa" />
+
+<img width="1446" height="288" alt="image" src="https://github.com/user-attachments/assets/1692856d-a9c5-4f44-b648-e57073310df7" />
