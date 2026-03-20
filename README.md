@@ -1,5 +1,5 @@
 # LogCat-Testing
-Aplicação testando o logcat do sistema android\n
+Aplicação testando o logcat do sistema android
 
 <img width="275" height="223" alt="image" src="https://github.com/user-attachments/assets/459a8dfb-1bb9-4402-8320-14ca31d91bfa" />
 
