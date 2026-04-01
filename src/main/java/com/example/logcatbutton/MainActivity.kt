@@ -1,11 +1,12 @@
 package com.example.logcatbutton
 
-import android.R
+import com.example.logcatbutton.R
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.logcatbutton.ui.theme.LogCatButtonTheme
@@ -84,6 +86,15 @@ fun MainScreen(
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(modifier = Modifier.fillMaxWidth(0.95f), Arrangement.SpaceEvenly) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                Image(painter = painterResource(R.drawable.icon), contentDescription = "" )
+            }
+            Spacer(Modifier.padding(bottom = 50.dp))
+
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                Text("Banco de dados de notas")
+            }
+            Spacer(Modifier.padding(bottom = 50.dp))
             Row {
                 OutlinedTextField(
                     value = textFieldText,
@@ -97,28 +108,28 @@ fun MainScreen(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onClickButtonDebug,
                     colors = ButtonDefaults.buttonColors(containerColor = colorScheme.primary)
-                ) { Text("Debug") }
+                ) { Text("MB") }
             }
             Row {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onClickButtonInfo,
                     colors = ButtonDefaults.buttonColors(containerColor = colorScheme.secondary)
-                ) { Text("Info") }
+                ) { Text("B") }
             }
             Row {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onClickButtonWarning,
                     colors = ButtonDefaults.buttonColors(containerColor = colorScheme.tertiary)
-                ) { Text("Warning") }
+                ) { Text("R") }
             }
             Row {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onClickButtonError,
                     colors = ButtonDefaults.buttonColors(containerColor = colorScheme.error)
-                ) { Text("Error") }
+                ) { Text("I") }
             }
         }
     }
